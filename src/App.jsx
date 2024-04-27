@@ -1,3 +1,5 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import Footer from "./components/common/footer.jsx";
 import Header from "./components/common/header.jsx";
 import Nav from "./components/common/nav.jsx";
@@ -13,18 +15,74 @@ import candles from "./data/candles.json";
 function App() {
   return (
     <div className="App">
-      <Header />
-      <div className="wrapper">
-        <Nav />
-        <main>
-          <Home />
-          <About />
-          <Newsletter />
-          <ProductList products={lamps} type={"Lamps"} />
-          <ProductList products={candles} type={"Candles"} />
-        </main>
-      </div>
-      <Footer />
+      <Router>
+        <Header />
+        <div className="wrapper">
+          <Nav />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/newsletter" element={<Newsletter />} />
+              <Route path="/lamps"
+                element={<ProductList
+                  products={lamps}
+                  category={"Lamps"} />}
+              />
+              {
+                [...new Set(lamps
+                  .map(({ type }) => type)
+                )
+                ].map( type => (
+                  <Route
+                  path={"/lamps/"+type}
+                  element={<ProductList
+                    products={lamps}
+                    category={"Lamps"}
+                    type={type}
+                    key={type}
+                    />}
+                  />
+                ))
+              }
+              <Route
+                path="/lamps/:type/:id"
+                element={<Product 
+                  products={lamps}
+                  category={"Lamps"} />}
+              />
+              <Route path="/candles"
+                element={<ProductList
+                  products={candles}
+                  category={"Candles"} />}
+              />
+              {
+                [...new Set(candles
+                  .map(({ type }) => type)
+                )
+                ].map( type => (
+                  <Route
+                  path={"/candles/"+type}
+                  element={<ProductList
+                    products={candles}
+                    category={"Candles"}
+                    type={type}
+                    key={type}
+                    />}
+                  />
+                ))
+              }
+              <Route
+                path="/candles/:type/:id"
+                element={<Product
+                  products={candles}
+                  category={"Candles"} />}
+              />
+            </Routes>
+          </main>
+        </div>
+        <Footer />
+      </Router>
     </div>
   );
 }

@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: 'Montserrat',  'Helvetica Neue',
     sans-serif;
-    color: darkgoldenrod;
+    /* color: darkgoldenrod; */
     background: rgb(250,250,250);
     background: radial-gradient(circle, rgba(250,250,250,1) 24%, rgba(255,243,230,1) 98%);
 }
@@ -53,6 +53,7 @@ nav {
 
 ul {
   list-style-type: none;
+  padding: 0;
 }
 
 
@@ -69,17 +70,14 @@ nav > div {
   padding: 1em;
 }
 
-
 .products a {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-
-
 a {
-  color: gold;
+  /* color: gold; */
   text-shadow: 2px 2px 4px rgb(237, 238, 210);
   text-decoration: none;
 }
